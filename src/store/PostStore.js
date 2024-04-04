@@ -23,14 +23,16 @@ export const usePostStore = defineStore("postStore", {
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("body", values.body);
-      formData.append("author_id", useUserStore().user?.id);
+      formData.append("user_id", useUserStore().user?.id);
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/posts/store",
+          "http://127.0.0.1:8000/api/posts",
+          formData,
           {
             headers: {
               Authorization: `Bearer ${useAuthStore().isAuth}`,
+              "Content-Type": "multipart/form-data",
             },
           },
         );

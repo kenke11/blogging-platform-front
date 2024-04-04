@@ -53,8 +53,12 @@
 <script setup>
 import { Field, Form } from "vee-validate";
 import InputField from "../../ui/inputs/InputField.vue";
+import { usePostStore } from "../../../store/PostStore.js";
+
+const postStore = usePostStore();
 
 const onSubmit = (values) => {
   console.log(values);
+  postStore.postStore(values);
 };
 </script>
