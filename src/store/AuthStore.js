@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../router/index.js";
+import { useUserStore } from "./UserStore.js";
 
 export const useAuthStore = defineStore("authStore", {
   id: "auth",
@@ -27,6 +28,7 @@ export const useAuthStore = defineStore("authStore", {
           this.isAuth = data.token;
           await router.push({ name: "home" });
           localStorage.setItem("user_token", response.data.token);
+          useUserStore().fetchUser(data.token);
         } else {
           this.isAuth = null;
         }
