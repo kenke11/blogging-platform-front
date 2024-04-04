@@ -14,7 +14,9 @@
             autocomplete="name"
             name="name"
             type="text"
-            :hasError="!!errors.name"
+            :hasError="!!errors.name || !!validationErrors['name']"
+            :hasErrorFromBack="!!validationErrors['name']"
+            :validationErrorMessage="validationErrors['name']"
             rules="required"
           />
 
@@ -54,6 +56,8 @@
             name="email"
             type="email"
             :hasError="!!errors.email"
+            :hasErrorFromBack="!!validationErrors['email']"
+            :validationErrorMessage="validationErrors['email']"
             rules="required|email"
           />
 
@@ -95,10 +99,19 @@
 import { Form, Field } from "vee-validate";
 import InputField from "../ui/inputs/InputField.vue";
 import { useAuthStore } from "../../store/AuthStore.js";
+import { ref, watch } from "vue";
 
 const authStore = useAuthStore();
+const validationErrors = ref([]);
 
 const onSubmit = (values) => {
   authStore.signup(values);
 };
+
+watch(
+  () => authStore.validationErrors,
+  (newValue) => {
+    validationErrors.value = newValue;
+  },
+);
 </script>

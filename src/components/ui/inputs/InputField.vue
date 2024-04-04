@@ -18,8 +18,12 @@
         v-model="defaultValue"
         :rules="rules"
         :value="value"
+        @change="removeMessage"
       />
       <p class="h-3 py-1">
+        <small class="text-red-500" v-if="hasErrorFromBack">{{
+          validationErrorMessage[0]
+        }}</small>
         <ErrorMessage :name="name" class="px-3 text-sm text-red-500" />
       </p>
     </div>
@@ -65,6 +69,16 @@ const props = defineProps({
     type: String,
     required: false,
     default: "",
+  },
+  validationErrorMessage: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  hasErrorFromBack: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 
