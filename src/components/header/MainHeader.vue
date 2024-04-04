@@ -29,8 +29,15 @@
 
       <div class="flex lg:gap-x-12">
         <div v-if="isAuth" class="flex flex-1 items-center justify-end gap-x-8">
-          <router-link :to="{ name: 'user' }" class="-m-1.5 p-1.5">
+          <router-link
+            :to="{ name: 'user' }"
+            class="-m-1.5 p-1.5 flex flex-col items-center justify-center border rounded-md hover:bg-gray-100"
+          >
             <span>{{ user?.name }}</span>
+            <span
+              class="text-sm px-1 py-0.5 rounded-md border border-green-300 bg-green-100"
+              >{{ user?.role }}</span
+            >
           </router-link>
         </div>
         <div v-else class="flex flex-1 items-center justify-end gap-x-8">

@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/AuthStore.js";
 import UserView from "../view/UserView.vue";
 import UserPosts from "../components/user/user-sections/UserPosts.vue";
 import CreatePost from "../components/user/user-sections/CreatePost.vue";
+import { useUserStore } from "../store/UserStore.js";
 
 const routes = [
   {
@@ -36,6 +37,7 @@ const routes = [
     redirect: { name: "user-posts" },
     meta: {
       isEditor: true,
+      requiresAuth: true,
     },
     children: [
       {

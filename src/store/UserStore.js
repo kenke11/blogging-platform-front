@@ -20,7 +20,7 @@ export const useUserStore = defineStore("userStore", {
       } catch (error) {
         useAuthStore().isAuth = null;
         this.user = [];
-        localStorage.removeItem("driver_token");
+        localStorage.removeItem("user_token");
       }
     },
   },
