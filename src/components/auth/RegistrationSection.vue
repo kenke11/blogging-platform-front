@@ -94,8 +94,12 @@
 <script setup>
 import { Form, Field } from "vee-validate";
 import InputField from "../ui/inputs/InputField.vue";
+import { useAuthStore } from "../../store/AuthStore.js";
+
+const authStore = useAuthStore();
 
 const onSubmit = (values) => {
   console.log(values);
+  authStore.singup(values);
 };
 </script>
