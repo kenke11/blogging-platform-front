@@ -17,16 +17,16 @@
           </h2>
         </div>
 
-        <LoginSection />
+        <RegistrationSection />
 
         <div class="mt-10">
           <p class="text-center text-sm leading-6 text-gray-500">
-            Register now.
+            Already have account?
             {{ " " }}
             <router-link
-              :to="{ name: 'sing-up' }"
+              :to="{ name: 'login' }"
               class="font-semibold text-indigo-600 hover:text-indigo-500"
-              >sing up</router-link
+              >Login</router-link
             >
           </p>
         </div>
@@ -38,5 +38,5 @@
 
 <script setup>
 import ImageSection from "../components/auth/ImageSection.vue";
-import LoginSection from "../components/auth/LoginSection.vue";
+import RegistrationSection from "../components/auth/RegistrationSection.vue";
 </script>
