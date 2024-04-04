@@ -21,7 +21,6 @@ export const useAuthStore = defineStore("authStore", {
           "http://127.0.0.1:8000/api/login",
           formData,
         );
-        console.log(response);
 
         const data = response.data;
         if (data.token) {

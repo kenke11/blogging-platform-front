@@ -6,6 +6,7 @@ export const useUserStore = defineStore("userStore", {
   id: "user",
   state: () => ({
     user: [],
+    role: null,
   }),
   actions: {
     async fetchUser(token) {
@@ -16,7 +17,7 @@ export const useUserStore = defineStore("userStore", {
           },
         });
         this.user = response.data.user;
-        console.log(response);
+        this.role = response.data.user.role;
       } catch (error) {
         useAuthStore().isAuth = null;
         this.user = [];

@@ -9,6 +9,16 @@ export const usePostStore = defineStore("postStore", {
     posts: [],
   }),
   actions: {
+    async fetchPosts(page = 1) {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/posts?page=${page}`,
+      );
+
+      if (response.status === 200) {
+        console.log(response.data.posts);
+        this.posts = response.data.posts;
+      }
+    },
     async postStore(values) {
       const formData = new FormData();
       formData.append("title", values.title);

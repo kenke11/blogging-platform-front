@@ -1,4 +1,7 @@
 <template>
-  <div>home</div>
+  <AllPosts />
 </template>
-<script setup></script>
+
+<script setup>
+import AllPosts from "../components/home/AllPosts.vue";
+</script>
