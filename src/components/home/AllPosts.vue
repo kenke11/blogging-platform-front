@@ -19,18 +19,19 @@
             </div>
             <div class="flex items-center space-x-2">
               <button
+                @click="openPostPopup(post)"
                 class="border rounded-md p-2 bg-gray-100 hover:bg-gray-200"
               >
                 <ViewIcon />
               </button>
               <button
-                v-if="user.id === post.user.id"
+                v-if="user?.id === post.user.id"
                 class="border rounded-md p-2 bg-blue-100 hover:bg-blue-200"
               >
                 <EditIcon />
               </button>
               <button
-                v-if="isAdmin || user.id === post.user.id"
+                v-if="isAdmin || user?.id === post.user.id"
                 class="border rounded-md p-2 bg-red-100 hover:bg-red-200"
               >
                 <DeleteIcon />
@@ -59,6 +60,15 @@
         </div>
       </div>
     </div>
+    <teleport to="body">
+      <PostContainer
+        v-if="isPostPopupOpen"
+        :isAdmin="isAdmin"
+        :post="openPost"
+        :user="user"
+        @closePostPopup="closePostPopup"
+      />
+    </teleport>
   </div>
 </template>
 
@@ -69,6 +79,7 @@ import EditIcon from "../icons/EditIcon.vue";
 import DeleteIcon from "../icons/DeleteIcon.vue";
 import { useUserStore } from "../../store/UserStore.js";
 import ViewIcon from "../icons/ViewIcon.vue";
+import PostContainer from "./post/PostContainer.vue";
 
 const postStore = usePostStore();
 const userStore = useUserStore();
@@ -79,6 +90,21 @@ const currentPage = ref(1);
 
 const isAdmin = computed(() => userStore.role === "admin");
 const totalPages = ref(userStore.posts?.last_page);
+
+const isPostPopupOpen = ref(false);
+
+const openPost = ref({});
+
+const openPostPopup = (post) => {
+  openPost.value = post;
+  isPostPopupOpen.value = true;
+};
+
+const closePostPopup = () => {
+  openPost.value = {};
+  isPostPopupOpen.value = false;
+};
+
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
