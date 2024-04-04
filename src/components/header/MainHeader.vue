@@ -29,7 +29,7 @@
 
       <div class="flex lg:gap-x-12">
         <div v-if="isAuth" class="flex flex-1 items-center justify-end gap-x-8">
-          <router-link :to="{ name: 'home' }" class="-m-1.5 p-1.5">
+          <router-link :to="{ name: 'user' }" class="-m-1.5 p-1.5">
             <span>{{ user?.name }}</span>
           </router-link>
         </div>

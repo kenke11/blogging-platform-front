@@ -15,7 +15,7 @@ export const useUserStore = defineStore("userStore", {
             Authorization: `Bearer ${token}`,
           },
         });
-        this.user = response.data;
+        this.user = response.data.user;
         console.log(response);
       } catch (error) {
         useAuthStore().isAuth = null;

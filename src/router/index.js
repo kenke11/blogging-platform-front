@@ -3,6 +3,9 @@ import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
 import RegistrationView from "../view/RegistrationView.vue";
 import { useAuthStore } from "../store/AuthStore.js";
+import UserView from "../view/UserView.vue";
+import UserPosts from "../components/user/user-sections/UserPosts.vue";
+import CreatePost from "../components/user/user-sections/CreatePost.vue";
 
 const routes = [
   {
@@ -25,6 +28,27 @@ const routes = [
     meta: {
       isAuth: true,
     },
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: UserView,
+    redirect: { name: "user-posts" },
+    meta: {
+      isEditor: true,
+    },
+    children: [
+      {
+        path: "",
+        name: "user-posts",
+        component: UserPosts,
+      },
+      {
+        path: "create-post",
+        name: "create-post",
+        component: CreatePost,
+      },
+    ],
   },
 ];
 
