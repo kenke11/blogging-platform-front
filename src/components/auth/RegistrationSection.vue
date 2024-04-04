@@ -99,7 +99,6 @@ import { useAuthStore } from "../../store/AuthStore.js";
 const authStore = useAuthStore();
 
 const onSubmit = (values) => {
-  console.log(values);
   authStore.signup(values);
 };
 </script>
