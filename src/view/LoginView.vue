@@ -24,9 +24,9 @@
             Register now.
             {{ " " }}
             <router-link
-              :to="{ name: 'sing-up' }"
+              :to="{ name: 'signup' }"
               class="font-semibold text-indigo-600 hover:text-indigo-500"
-              >sing up</router-link
+              >Signup</router-link
             >
           </p>
         </div>

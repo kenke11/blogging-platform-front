@@ -100,6 +100,6 @@ const authStore = useAuthStore();
 
 const onSubmit = (values) => {
   console.log(values);
-  authStore.singup(values);
+  authStore.signup(values);
 };
 </script>

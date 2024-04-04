@@ -7,7 +7,7 @@ export const useAuthStore = defineStore("authStore", {
     isAuth: null,
   }),
   actions: {
-    async singup(values) {
+    async signup(values) {
       try {
         const formData = new FormData();
         formData.append("name", values.name);
