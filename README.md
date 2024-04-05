@@ -3,7 +3,7 @@
 ## Initialisation
 
 ```bash
-git clone 
+git clone https://github.com/kenke11/blogging-platform-front.git
 ```
 
 ### Go to project folder
