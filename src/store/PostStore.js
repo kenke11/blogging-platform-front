@@ -15,7 +15,6 @@ export const usePostStore = defineStore("postStore", {
       );
 
       if (response.status === 200) {
-        console.log(response.data.posts);
         this.posts = response.data.posts;
       }
     },
@@ -48,7 +47,7 @@ export const usePostStore = defineStore("postStore", {
       formData.append("published_date", values.published_date);
 
       try {
-        const response = await axios.put(
+        await axios.put(
           `http://127.0.0.1:8000/api/posts/${postId}/update`,
           formData,
           {
@@ -59,7 +58,29 @@ export const usePostStore = defineStore("postStore", {
             },
           },
         );
-        console.log(response);
+
+        await this.fetchPosts(this.posts?.current_page);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async postDestroy(postId) {
+      const formData = new FormData();
+      formData.append("user_id", useUserStore().user?.id);
+
+      try {
+        await axios.post(
+          `http://127.0.0.1:8000/api/posts/${postId}/destroy`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${useAuthStore().isAuth}`,
+              "Content-Type": "multipart/form-data",
+            },
+          },
+        );
+
+        await this.fetchPosts(this.posts?.current_page);
       } catch (error) {
         console.log(error);
       }

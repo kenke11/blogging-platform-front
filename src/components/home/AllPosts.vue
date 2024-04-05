@@ -33,6 +33,7 @@
               </button>
               <button
                 v-if="isAdmin || user?.id === post.user.id"
+                @click="deletePost(post.id)"
                 class="border rounded-md p-2 bg-red-100 hover:bg-red-200"
               >
                 <DeleteIcon />
@@ -103,6 +104,10 @@ const isPostPopupOpen = ref(false);
 const isPostEditPopupOpen = ref(false);
 
 const openPost = ref({});
+
+const deletePost = (postId) => {
+  postStore.postDestroy(postId);
+};
 
 const openPostPopup = (post) => {
   openPost.value = post;

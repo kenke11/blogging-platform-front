@@ -44,6 +44,7 @@
               </button>
               <button
                 v-if="isAdmin || user?.id === post.user.id"
+                @click="deletePost"
                 class="border rounded-md p-2 bg-red-100 hover:bg-red-200"
               >
                 <DeleteIcon />
@@ -85,12 +86,14 @@ import CommentSection from "./CommentSection.vue";
 import { useAuthStore } from "../../../store/AuthStore.js";
 import { computed } from "vue";
 import XIcon from "../../icons/XIcon.vue";
+import { usePostStore } from "../../../store/PostStore.js";
 
 const authStore = useAuthStore();
+const postStore = usePostStore();
 
 const isAuth = computed(() => authStore.isAuth);
 
-defineProps({
+const props = defineProps({
   post: {
     type: Object,
     required: true,
@@ -111,5 +114,10 @@ const emit = defineEmits(["closePostPopup"]);
 
 const closePostPopup = () => {
   emit("closePostPopup");
+};
+
+const deletePost = () => {
+  postStore.postDestroy(props.post.id);
+  closePostPopup();
 };
 </script>
