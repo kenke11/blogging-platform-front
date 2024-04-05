@@ -6,7 +6,7 @@
       class="py-3 border-t border-b flex justify-between items-start px-4"
     >
       <div>
-        <div>{{ comment?.user?.name }}</div>
+        <div class="mb-1 font-semibold">{{ comment?.user?.name }}</div>
         <div>
           {{ comment?.comment }}
         </div>
@@ -14,7 +14,7 @@
 
       <div>
         <button
-          v-if="deleteBtnEnable"
+          v-if="isAdmin || user?.id === comment.user.id"
           type="button"
           class="border rounded-md p-2 bg-red-100 hover:bg-red-200"
         >
@@ -35,7 +35,12 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  deleteBtnEnable: {
+  user: {
+    type: Object,
+    required: false,
+    default: null,
+  },
+  isAdmin: {
     type: Boolean,
     required: true,
   },

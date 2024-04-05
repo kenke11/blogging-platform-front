@@ -49,26 +49,31 @@
         </div>
         <div class="px-8 py-6 border-t">
           <div v-if="isAuth">
-            <Form class="flex items-end justify-between space-x-3">
+            <Form
+              @submit="commentOnSubmit"
+              v-slot="{ errors }"
+              method="POST"
+              class="flex items-end justify-between space-x-3"
+            >
               <InputField
                 id="comment"
                 label="Add Comment"
-                name="comment"
                 autocomplete="comment"
-                class="w-full"
+                name="comment"
+                type="text"
+                :hasError="!!errors.comment"
+                rules="required"
+                class="w-full mb-6"
               />
               <button
-                type="button"
-                class="text-nowrap px-4 py-2 border rounded-md mb-2 bg-blue-100"
+                type="submit"
+                class="text-nowrap px-4 py-2 border rounded-md mb-8 bg-blue-100"
               >
                 Add comment
               </button>
             </Form>
           </div>
-          <CommentSection
-            :post="post"
-            :deleteBtnEnable="isAdmin || user?.id === post.user.id"
-          />
+          <CommentSection :post="post" :isAdmin="isAdmin" :user="user" />
         </div>
       </div>
     </div>
@@ -84,6 +89,8 @@ import { useAuthStore } from "../../../store/AuthStore.js";
 import { computed, onMounted } from "vue";
 import XIcon from "../../icons/XIcon.vue";
 import { usePostStore } from "../../../store/PostStore.js";
+import { useCommentStore } from "../../../store/CommentStore.js";
+import { Form } from "vee-validate";
 
 const authStore = useAuthStore();
 const postStore = usePostStore();
@@ -109,6 +116,8 @@ const props = defineProps({
 
 const emit = defineEmits(["closePostPopup"]);
 
+const commentStore = useCommentStore();
+
 const closePostPopup = () => {
   emit("closePostPopup");
 };
@@ -116,6 +125,10 @@ const closePostPopup = () => {
 const deletePost = () => {
   postStore.postDestroy(props.post.id);
   closePostPopup();
+};
+
+const commentOnSubmit = (values) => {
+  commentStore.commentStore(values, props.post.id);
 };
 
 onMounted(() => {
