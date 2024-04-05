@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { useAuthStore } from "./AuthStore.js";
-import { useUserStore } from "./UserStore.js";
-import router from "../router/index.js";
+import { useAuthStore } from "@/store/AuthStore.js";
+import { useUserStore } from "@/store/UserStore.js";
+import router from "@/router/index.js";
 
 export const usePostStore = defineStore("postStore", {
   id: "post",
@@ -13,7 +13,7 @@ export const usePostStore = defineStore("postStore", {
   actions: {
     async fetchPosts(page = 1) {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/posts?page=${page}`,
+        `${import.meta.env.VITE_APP_BACK_URL}/posts?page=${page}`,
       );
 
       if (response.status === 200) {
@@ -22,7 +22,7 @@ export const usePostStore = defineStore("postStore", {
     },
     async fetchEditorPosts(page = 1, userId) {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/users/${userId}/posts?page=${page}`,
+        `${import.meta.env.VITE_APP_BACK_URL}/users/${userId}/posts?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${useAuthStore().isAuth}`,
@@ -43,7 +43,7 @@ export const usePostStore = defineStore("postStore", {
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/posts",
+          `${import.meta.env.VITE_APP_BACK_URL}/posts`,
           formData,
           {
             headers: {
@@ -68,7 +68,7 @@ export const usePostStore = defineStore("postStore", {
 
       try {
         await axios.put(
-          `http://127.0.0.1:8000/api/posts/${postId}/update`,
+          `${import.meta.env.VITE_APP_BACK_URL}/posts/${postId}/update`,
           formData,
           {
             headers: {
@@ -92,7 +92,7 @@ export const usePostStore = defineStore("postStore", {
 
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/api/posts/view/user/${userId}/post/${postId}`,
+          `${import.meta.env.VITE_APP_BACK_URL}/posts/view/user/${userId}/post/${postId}`,
           formData,
           {
             headers: {
@@ -115,7 +115,7 @@ export const usePostStore = defineStore("postStore", {
 
       try {
         await axios.post(
-          `http://127.0.0.1:8000/api/posts/${postId}/destroy`,
+          `${import.meta.env.VITE_APP_BACK_URL}/posts/${postId}/destroy`,
           formData,
           {
             headers: {

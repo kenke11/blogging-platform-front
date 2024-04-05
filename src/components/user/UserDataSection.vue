@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { useUserStore } from "../../store/UserStore.js";
+import { useUserStore } from "@/store/UserStore.js";
 import { ref, watch } from "vue";
 
 const userStore = useUserStore();

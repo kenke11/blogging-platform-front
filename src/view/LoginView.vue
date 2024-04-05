@@ -37,6 +37,6 @@
 </template>
 
 <script setup>
-import ImageSection from "../components/auth/ImageSection.vue";
-import LoginSection from "../components/auth/LoginSection.vue";
+import ImageSection from "@/components/auth/ImageSection.vue";
+import LoginSection from "@/components/auth/LoginSection.vue";
 </script>

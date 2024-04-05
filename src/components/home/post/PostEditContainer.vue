@@ -91,10 +91,10 @@
 </template>
 
 <script setup>
-import InputField from "../../ui/inputs/InputField.vue";
-import XIcon from "../../icons/XIcon.vue";
 import { Field, Form } from "vee-validate";
-import { usePostStore } from "../../../store/PostStore.js";
+import { usePostStore } from "@/store/PostStore.js";
+import InputField from "@/components/ui/inputs/InputField.vue";
+import XIcon from "@/components/icons/XIcon.vue";
 
 const props = defineProps({
   post: {

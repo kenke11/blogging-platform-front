@@ -4,10 +4,10 @@
 </template>
 
 <script setup>
-import MainHeader from "./components/header/MainHeader.vue";
 import { onBeforeMount } from "vue";
-import { useUserStore } from "./store/UserStore.js";
-import { useAuthStore } from "./store/AuthStore.js";
+import MainHeader from "@/components/header/MainHeader.vue";
+import { useUserStore } from "@/store/UserStore.js";
+import { useAuthStore } from "@/store/AuthStore.js";
 
 const userStore = useUserStore();
 const authStore = useAuthStore();

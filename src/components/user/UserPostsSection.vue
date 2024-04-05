@@ -82,13 +82,13 @@
 
 <script setup>
 import { computed, onBeforeMount, ref, watch } from "vue";
-import { usePostStore } from "../../store/PostStore.js";
-import EditIcon from "../icons/EditIcon.vue";
-import DeleteIcon from "../icons/DeleteIcon.vue";
-import { useUserStore } from "../../store/UserStore.js";
-import ViewIcon from "../icons/ViewIcon.vue";
-import PostContainer from "../home/post/PostContainer.vue";
-import PostEditContainer from "../home/post/PostEditContainer.vue";
+import { usePostStore } from "@/store/PostStore.js";
+import { useUserStore } from "@/store/UserStore.js";
+import PostEditContainer from "@/components/home/post/PostEditContainer.vue";
+import PostContainer from "@/components/home/post/PostContainer.vue";
+import DeleteIcon from "@/components/icons/DeleteIcon.vue";
+import EditIcon from "@/components/icons/EditIcon.vue";
+import ViewIcon from "@/components/icons/ViewIcon.vue";
 
 const postStore = usePostStore();
 const userStore = useUserStore();

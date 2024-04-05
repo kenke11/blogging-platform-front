@@ -44,8 +44,8 @@
 
 <script setup>
 import { Form } from "vee-validate";
-import InputField from "../ui/inputs/InputField.vue";
-import { useAuthStore } from "../../store/AuthStore.js";
+import { useAuthStore } from "@/store/AuthStore.js";
+import InputField from "@/components/ui/inputs/InputField.vue";
 
 const authStore = useAuthStore();
 

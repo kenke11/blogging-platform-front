@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { useAuthStore } from "./AuthStore.js";
+import { useAuthStore } from "@/store/AuthStore.js";
 
 export const useUserStore = defineStore("userStore", {
   id: "user",
@@ -11,11 +11,14 @@ export const useUserStore = defineStore("userStore", {
   actions: {
     async fetchUser(token) {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/user", {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_BACK_URL}/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
         this.user = response.data.user;
         this.role = response.data.user.role;
       } catch (error) {

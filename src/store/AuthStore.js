@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import router from "../router/index.js";
-import { useUserStore } from "./UserStore.js";
+import router from "@/router/index.js";
+import { useUserStore } from "@/store/UserStore.js";
 
 export const useAuthStore = defineStore("authStore", {
   id: "auth",
@@ -18,7 +18,7 @@ export const useAuthStore = defineStore("authStore", {
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/login",
+          `${import.meta.env.VITE_APP_BACK_URL}/login`,
           formData,
         );
 
@@ -27,7 +27,7 @@ export const useAuthStore = defineStore("authStore", {
           this.isAuth = data.token;
           await router.push({ name: "home" });
           localStorage.setItem("user_token", response.data.token);
-          useUserStore().fetchUser(data.token);
+          await useUserStore().fetchUser(data.token);
         } else {
           this.isAuth = null;
         }
@@ -41,13 +41,17 @@ export const useAuthStore = defineStore("authStore", {
       const formData = new FormData();
       formData.append("user_id", useUserStore().user.id);
 
-      await axios.post("http://127.0.0.1:8000/api/logout", formData, {
-        headers: {
-          Authorization: `Bearer ${useAuthStore().isAuth}`,
-          accept: "*/*",
-          "Content-Type": "application/json",
+      await axios.post(
+        `${import.meta.env.VITE_APP_BACK_URL}/logout`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${useAuthStore().isAuth}`,
+            accept: "*/*",
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
 
       this.isAuth = null;
       await router.push({ name: "home" });
@@ -63,7 +67,10 @@ export const useAuthStore = defineStore("authStore", {
         formData.append("role", values.role);
         formData.append("password", values.password);
 
-        await axios.post("http://127.0.0.1:8000/api/signup", formData);
+        await axios.post(
+          `${import.meta.env.VITE_APP_BACK_URL}/signup`,
+          formData,
+        );
 
         await router.push({ name: "login" });
       } catch (error) {

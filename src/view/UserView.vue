@@ -11,10 +11,11 @@
 </template>
 
 <script setup>
-import UserDataSection from "../components/user/UserDataSection.vue";
-import UserNavigation from "../components/user/UserNavigation.vue";
-import { useUserStore } from "../store/UserStore.js";
 import { ref, watch } from "vue";
+import UserDataSection from "@/components/user/UserDataSection.vue";
+import UserNavigation from "@/components/user/UserNavigation.vue";
+import { useUserStore } from "@/store/UserStore.js";
+
 const userStore = useUserStore();
 
 const user = ref(userStore.user);

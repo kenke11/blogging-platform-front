@@ -75,16 +75,15 @@
 </template>
 
 <script setup>
-import EditIcon from "../../icons/EditIcon.vue";
-import DeleteIcon from "../../icons/DeleteIcon.vue";
-import InputField from "../../ui/inputs/InputField.vue";
-import CommentSection from "./CommentSection.vue";
-import { useAuthStore } from "../../../store/AuthStore.js";
+import { useAuthStore } from "@/store/AuthStore.js";
 import { computed, onMounted } from "vue";
-import XIcon from "../../icons/XIcon.vue";
-import { usePostStore } from "../../../store/PostStore.js";
-import { useCommentStore } from "../../../store/CommentStore.js";
+import { usePostStore } from "@/store/PostStore.js";
+import { useCommentStore } from "@/store/CommentStore.js";
 import { Form } from "vee-validate";
+import CommentSection from "@/components/home/post/CommentSection.vue";
+import InputField from "@/components/ui/inputs/InputField.vue";
+import DeleteIcon from "@/components/icons/DeleteIcon.vue";
+import XIcon from "@/components/icons/XIcon.vue";
 
 const authStore = useAuthStore();
 const postStore = usePostStore();

@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../view/HomeView.vue";
-import LoginView from "../view/LoginView.vue";
-import RegistrationView from "../view/RegistrationView.vue";
-import { useAuthStore } from "../store/AuthStore.js";
-import UserView from "../view/UserView.vue";
-import UserPosts from "../components/user/user-sections/UserPosts.vue";
-import CreatePost from "../components/user/user-sections/CreatePost.vue";
-import { useUserStore } from "../store/UserStore.js";
+import HomeView from "@/view/HomeView.vue";
+import LoginView from "@/view/LoginView.vue";
+import RegistrationView from "@/view/RegistrationView.vue";
+import UserView from "@/view/UserView.vue";
+import UserPosts from "@/components/user/user-sections/UserPosts.vue";
+import CreatePost from "@/components/user/user-sections/CreatePost.vue";
+import { useAuthStore } from "@/store/AuthStore.js";
 
 const routes = [
   {

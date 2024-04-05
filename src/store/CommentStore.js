@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { useUserStore } from "./UserStore.js";
-import { useAuthStore } from "./AuthStore.js";
+import { useUserStore } from "@/store/UserStore.js";
+import { useAuthStore } from "@/store/AuthStore.js";
 
 export const useCommentStore = defineStore("commentStore", {
   id: "comment",
@@ -12,7 +12,7 @@ export const useCommentStore = defineStore("commentStore", {
     async fetchComments(postId) {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/comments/posts/${postId}`,
+          `${import.meta.env.VITE_APP_BACK_URL}/comments/posts/${postId}`,
         );
 
         if (response.status === 200) {
@@ -31,7 +31,7 @@ export const useCommentStore = defineStore("commentStore", {
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/comments",
+          `${import.meta.env.VITE_APP_BACK_URL}/comments`,
           formData,
           {
             headers: {
@@ -57,7 +57,7 @@ export const useCommentStore = defineStore("commentStore", {
 
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/api/comments/${commentId}/destroy`,
+          `${import.meta.env.VITE_APP_BACK_URL}/comments/${commentId}/destroy`,
           formData,
           {
             headers: {

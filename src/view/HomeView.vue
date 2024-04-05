@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import AllPosts from "../components/home/AllPosts.vue";
+import AllPosts from "@/components/home/AllPosts.vue";
 </script>

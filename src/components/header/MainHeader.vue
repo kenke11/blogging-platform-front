@@ -61,9 +61,9 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "../../store/AuthStore.js";
+import { useAuthStore } from "@/store/AuthStore.js";
 import { ref, watch } from "vue";
-import { useUserStore } from "../../store/UserStore.js";
+import { useUserStore } from "@/store/UserStore.js";
 
 const authStore = useAuthStore();
 const userStore = useUserStore();

@@ -52,8 +52,8 @@
 
 <script setup>
 import { Field, Form } from "vee-validate";
-import InputField from "../../ui/inputs/InputField.vue";
-import { usePostStore } from "../../../store/PostStore.js";
+import { usePostStore } from "@/store/PostStore.js";
+import InputField from "@/components/ui/inputs/InputField.vue";
 
 const postStore = usePostStore();
 

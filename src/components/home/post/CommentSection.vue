@@ -27,9 +27,9 @@
 </template>
 
 <script setup>
-import DeleteIcon from "../../icons/DeleteIcon.vue";
-import { useCommentStore } from "../../../store/CommentStore.js";
+import { useCommentStore } from "@/store/CommentStore.js";
 import { onMounted, ref, watch } from "vue";
+import DeleteIcon from "@/components/icons/DeleteIcon.vue";
 
 const props = defineProps({
   post: {
