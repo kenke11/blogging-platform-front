@@ -28,7 +28,7 @@
             <div>
               <div class="font-semibold">{{ post.user.name }}</div>
               <div class="text-sm">{{ post.views_count }} views</div>
-              <div class="text-sm text-gray-600">{{ post.created_at }}</div>
+              <div class="text-sm text-gray-600">{{ post.published_date }}</div>
             </div>
             <div class="flex items-center space-x-2">
               <button

@@ -15,7 +15,7 @@
             <div>
               <div class="font-semibold">{{ post.user.name }}</div>
               <div class="text-sm">{{ post.views_count }} views</div>
-              <div class="text-sm text-gray-600">{{ post.created_at }}</div>
+              <div class="text-sm text-gray-600">{{ post.published_date }}</div>
             </div>
             <div class="flex items-center space-x-2">
               <button
@@ -26,6 +26,7 @@
               </button>
               <button
                 v-if="user?.id === post.user.id"
+                @click="openPostEditPopup(post)"
                 class="border rounded-md p-2 bg-blue-100 hover:bg-blue-200"
               >
                 <EditIcon />
@@ -68,6 +69,12 @@
         :user="user"
         @closePostPopup="closePostPopup"
       />
+      <PostEditContainer
+        v-if="isPostEditPopupOpen"
+        :post="openPost"
+        :user="user"
+        @closePostEditPopup="closePostEditPopup"
+      />
     </teleport>
   </div>
 </template>
@@ -80,6 +87,7 @@ import DeleteIcon from "../icons/DeleteIcon.vue";
 import { useUserStore } from "../../store/UserStore.js";
 import ViewIcon from "../icons/ViewIcon.vue";
 import PostContainer from "./post/PostContainer.vue";
+import PostEditContainer from "./post/PostEditContainer.vue";
 
 const postStore = usePostStore();
 const userStore = useUserStore();
@@ -92,6 +100,7 @@ const isAdmin = computed(() => userStore.role === "admin");
 const totalPages = ref(userStore.posts?.last_page);
 
 const isPostPopupOpen = ref(false);
+const isPostEditPopupOpen = ref(false);
 
 const openPost = ref({});
 
@@ -103,6 +112,16 @@ const openPostPopup = (post) => {
 const closePostPopup = () => {
   openPost.value = {};
   isPostPopupOpen.value = false;
+};
+
+const openPostEditPopup = (post) => {
+  openPost.value = post;
+  isPostEditPopupOpen.value = true;
+};
+
+const closePostEditPopup = () => {
+  openPost.value = {};
+  isPostEditPopupOpen.value = false;
 };
 
 const nextPage = () => {

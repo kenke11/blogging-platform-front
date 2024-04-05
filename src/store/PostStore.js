@@ -41,6 +41,29 @@ export const usePostStore = defineStore("postStore", {
         console.log(error);
       }
     },
+    async postEdit(values, postId) {
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("body", values.body);
+      formData.append("published_date", values.published_date);
+
+      try {
+        const response = await axios.put(
+          `http://127.0.0.1:8000/api/posts/${postId}/update`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${useAuthStore().isAuth}`,
+              accept: "*/*",
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   getters: {},
 });
