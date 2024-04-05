@@ -117,7 +117,7 @@ const closePostPopup = () => {
 };
 
 const onSubmit = (values) => {
-  console.log(values);
   postStore.postEdit(values, props.post.id);
+  closePostPopup();
 };
 </script>

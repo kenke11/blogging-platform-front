@@ -37,6 +37,22 @@ export const useAuthStore = defineStore("authStore", {
         }
       }
     },
+    async logout() {
+      const formData = new FormData();
+      formData.append("user_id", useUserStore().user.id);
+
+      await axios.post("http://127.0.0.1:8000/api/logout", formData, {
+        headers: {
+          Authorization: `Bearer ${useAuthStore().isAuth}`,
+          accept: "*/*",
+          "Content-Type": "application/json",
+        },
+      });
+
+      this.isAuth = null;
+      await router.push({ name: "home" });
+      localStorage.removeItem("user_token");
+    },
     async signup(values) {
       this.validationErrors = [];
 
@@ -47,11 +63,9 @@ export const useAuthStore = defineStore("authStore", {
         formData.append("role", values.role);
         formData.append("password", values.password);
 
-        const response = await axios.post(
-          "http://127.0.0.1:8000/api/signup",
-          formData,
-        );
-        console.log(response);
+        await axios.post("http://127.0.0.1:8000/api/signup", formData);
+
+        await router.push({ name: "login" });
       } catch (error) {
         if (error.response.status === 422) {
           this.validationErrors = error.response.data.errors;

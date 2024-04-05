@@ -39,6 +39,13 @@
               >{{ user?.role }}</span
             >
           </router-link>
+          <button
+            type="button"
+            @click="logout"
+            class="-m-1.5 p-1.5 flex flex-col items-center justify-center border rounded-md hover:bg-gray-100"
+          >
+            logout
+          </button>
         </div>
         <div v-else class="flex flex-1 items-center justify-end gap-x-8">
           <router-link :to="{ name: 'login' }" class="-m-1.5 p-1.5">
@@ -63,6 +70,10 @@ const userStore = useUserStore();
 
 const isAuth = ref(authStore.isAuth);
 const user = ref(userStore.user);
+
+const logout = () => {
+  authStore.logout();
+};
 
 watch(
   () => authStore.isAuth,

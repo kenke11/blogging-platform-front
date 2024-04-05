@@ -32,12 +32,6 @@
             </div>
             <div class="flex items-center space-x-2">
               <button
-                v-if="user?.id === post.user.id"
-                class="border rounded-md p-2 bg-blue-100 hover:bg-blue-200"
-              >
-                <EditIcon />
-              </button>
-              <button
                 v-if="isAdmin || user?.id === post.user.id"
                 @click="deletePost"
                 class="border rounded-md p-2 bg-red-100 hover:bg-red-200"

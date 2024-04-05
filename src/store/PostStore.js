@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { useAuthStore } from "./AuthStore.js";
 import { useUserStore } from "./UserStore.js";
+import router from "../router/index.js";
 
 export const usePostStore = defineStore("postStore", {
   id: "post",
@@ -51,7 +52,10 @@ export const usePostStore = defineStore("postStore", {
             },
           },
         );
-        console.log(response);
+
+        if (response.status === 200) {
+          await router.push({ name: "user" });
+        }
       } catch (error) {
         console.log(error);
       }
