@@ -1,3 +1,6 @@
 <template>
-  <div>posts</div>
+  <UserPostsSection />
 </template>
+<script setup>
+import UserPostsSection from "../UserPostsSection.vue";
+</script>

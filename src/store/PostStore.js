@@ -7,6 +7,7 @@ export const usePostStore = defineStore("postStore", {
   id: "post",
   state: () => ({
     posts: [],
+    editorPosts: [],
   }),
   actions: {
     async fetchPosts(page = 1) {
@@ -16,6 +17,21 @@ export const usePostStore = defineStore("postStore", {
 
       if (response.status === 200) {
         this.posts = response.data.posts;
+      }
+    },
+    async fetchEditorPosts(page = 1, userId) {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/users/${userId}/posts?page=${page}`,
+        {
+          headers: {
+            Authorization: `Bearer ${useAuthStore().isAuth}`,
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      if (response.status === 200) {
+        this.editorPosts = response.data.posts;
       }
     },
     async postStore(values) {
