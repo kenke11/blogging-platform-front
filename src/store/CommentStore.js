@@ -50,6 +50,32 @@ export const useCommentStore = defineStore("commentStore", {
         console.log(error);
       }
     },
+    async commentDestroy(commentId, postId) {
+      const formData = new FormData();
+      formData.append("user_id", useUserStore().user?.id);
+      formData.append("post_id", postId);
+
+      try {
+        const response = await axios.post(
+          `http://127.0.0.1:8000/api/comments/${commentId}/destroy`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${useAuthStore().isAuth}`,
+              "Content-Type": "multipart/form-data",
+            },
+          },
+        );
+
+        if (response.status === 200) {
+          this.comments = this.comments.filter(
+            (comment) => comment.id !== commentId,
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
     removeComments() {
       this.comments = [];
     },

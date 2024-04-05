@@ -15,6 +15,7 @@
       <div>
         <button
           v-if="isAdmin || user?.id === comment.user.id"
+          @click="deleteComment(comment.id)"
           type="button"
           class="border rounded-md p-2 bg-red-100 hover:bg-red-200"
         >
@@ -48,6 +49,10 @@ const props = defineProps({
 
 const commentStore = useCommentStore();
 const comments = ref(commentStore.comments);
+
+const deleteComment = (commentId) => {
+  commentStore.commentDestroy(commentId, props.post.id);
+};
 
 onMounted(() => {
   commentStore.fetchComments(props.post.id);
