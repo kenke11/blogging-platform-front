@@ -32,11 +32,6 @@
             </div>
             <div class="flex items-center space-x-2">
               <button
-                class="border rounded-md p-2 bg-gray-100 hover:bg-gray-200"
-              >
-                <ViewIcon />
-              </button>
-              <button
                 v-if="user?.id === post.user.id"
                 class="border rounded-md p-2 bg-blue-100 hover:bg-blue-200"
               >
@@ -70,7 +65,10 @@
               </button>
             </Form>
           </div>
-          <CommentSection />
+          <CommentSection
+            :post="post"
+            :deleteBtnEnable="isAdmin || user?.id === post.user.id"
+          />
         </div>
       </div>
     </div>
@@ -80,7 +78,6 @@
 <script setup>
 import EditIcon from "../../icons/EditIcon.vue";
 import DeleteIcon from "../../icons/DeleteIcon.vue";
-import ViewIcon from "../../icons/ViewIcon.vue";
 import InputField from "../../ui/inputs/InputField.vue";
 import CommentSection from "./CommentSection.vue";
 import { useAuthStore } from "../../../store/AuthStore.js";
