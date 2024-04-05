@@ -84,7 +84,7 @@ import ViewIcon from "../../icons/ViewIcon.vue";
 import InputField from "../../ui/inputs/InputField.vue";
 import CommentSection from "./CommentSection.vue";
 import { useAuthStore } from "../../../store/AuthStore.js";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import XIcon from "../../icons/XIcon.vue";
 import { usePostStore } from "../../../store/PostStore.js";
 
@@ -120,4 +120,10 @@ const deletePost = () => {
   postStore.postDestroy(props.post.id);
   closePostPopup();
 };
+
+onMounted(() => {
+  if (isAuth.value) {
+    postStore.postViewed(props.post.id);
+  }
+});
 </script>

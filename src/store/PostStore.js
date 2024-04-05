@@ -64,6 +64,31 @@ export const usePostStore = defineStore("postStore", {
         console.log(error);
       }
     },
+    async postViewed(postId) {
+      const formData = new FormData();
+      const userId = useUserStore().user?.id;
+      formData.append("user_id", userId);
+      formData.append("post_id", postId);
+
+      try {
+        const response = await axios.post(
+          `http://127.0.0.1:8000/api/posts/view/user/${userId}/post/${postId}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${useAuthStore().isAuth}`,
+              "Content-Type": "multipart/form-data",
+            },
+          },
+        );
+
+        if (response.status === 200 && response.data.view) {
+          await this.fetchPosts(this.posts?.current_page);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async postDestroy(postId) {
       const formData = new FormData();
       formData.append("user_id", useUserStore().user?.id);
