@@ -1,7 +1,38 @@
-# Vue 3 + Vite
+# Blogging platform front
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Initialisation
 
-## Recommended IDE Setup
+```bash
+git clone 
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+### Go to project folder
+
+```bash
+cd blogging-platform-front
+```
+
+### Create local env file
+
+```bash
+cp .env.example .env
+```
+
+### change .env
+
+#### Enter your back api url
+
+```dotenv
+VITE_APP_BACK_URL=http://127.0.0.1:8000/api
+```
+
+## Project setup
+
+```bash
+npm install
+```
+
+### Compiles and hot-reloads for development
+```bash
+npm run dev
+```
